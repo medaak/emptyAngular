@@ -4,10 +4,56 @@
         <meta charset="utf-8">
         <title>Angular Project</title>
         <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="semantic/dist/semantic.min.js"></script>
         <script src="js/libs/angular.min.js"></script>
         <script src="js/controllers/mainController.js"></script>
         <script src="js/app.js"></script>
     </head>
-    <body ng-controller='mainController'></body>
-</html>
+    <body ng-controller='mainController'>
+      <br>
+        <form name="myForm">
+            <div class="ui form">
+                <div class="fields">
+                    <div class="required field">
+                        <label>Nom</label>
+                        <input name="nom" ng-model="person.lastName" placeholder="Nom" type="text" required>
+                    </div>
+                    <div class="required field">
+                        <label>Prénom</label>
+                        <input name="prenom" ng-model="person.firstName" placeholder="Prénom" type="text" required>
+                    </div>
+                    <div class="required field">
+                        <label>E-mail</label>
+                        <input name="mail" ng-model="person.email" placeholder="E-mail" type="email" required>
+                    </div>
+                </div>
+
+                <div class="ui submit button" value="Submit" ng-click="myForm.nom.$invalid || myForm.prenom.$invalid || myForm.mail.$invalid || addPerson(person)">Envoyer</div>
+                <div ng-show="myForm.nom.$invalid || myForm.prenom.$invalid || myForm.mail.$invalid">
+                    Veuillez compléter tous les champs correctement.
+                </div>
+            </form>
+            <!-- Affichage de la personne en + -->
+            <br>
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="person in persons">
+                        <td>
+                            {{person.lastName}}
+                        </td>
+                        <td>{{person.firstName}}</td>
+                        <td>{{person.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </body>
+    </html>
